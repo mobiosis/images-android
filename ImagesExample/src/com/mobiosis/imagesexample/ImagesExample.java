@@ -22,7 +22,7 @@ import com.mobiosis.images.ImageCache.ViewObserver;
 import com.mobiosis.images.RemoteImage;
 import com.mobiosis.imagesexample.FlickrTask.FlickrTaskObserver;
 
-public class MainActivity extends Activity implements ViewObserver, FlickrTaskObserver {
+public class ImagesExample extends Activity implements ViewObserver, FlickrTaskObserver {
 	
 	/**
 	 * put your flickr api_key (app might work without it, but I can't guarantee it
@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements ViewObserver, FlickrTaskOb
 	 */
 	final static String api_key = "";
 	
-	final static String LOG_TAG = "MainActivity";
+	final static String LOG_TAG = "ImagesExample";
 	
 	class GridAdapter extends BaseAdapter {
 		ArrayList<String> list;
@@ -58,7 +58,7 @@ public class MainActivity extends Activity implements ViewObserver, FlickrTaskOb
 			
 			//fetch more pages if possible
 			if (position == getCount()-1)
-				MainActivity.this.fetchNextPage();
+				ImagesExample.this.fetchNextPage();
 			
 			return imageView;
 		}
@@ -91,10 +91,10 @@ public class MainActivity extends Activity implements ViewObserver, FlickrTaskOb
 			imageCache = new ImageCache(vo);
 		}
 
-		public void setObserver(MainActivity mainActivity) {
-			imageCache.setObserver(mainActivity);
+		public void setObserver(ImagesExample ImagesExample) {
+			imageCache.setObserver(ImagesExample);
 			if (imageTask != null)
-				imageTask.setObserver(mainActivity);
+				imageTask.setObserver(ImagesExample);
 		}
 	}
 	
