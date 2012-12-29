@@ -1,0 +1,38 @@
+x1) use String.hashCode() for file name
+2) use LruCache for storing images in the memory        
+x3) set max image size to the screen size - use getDisplayMetrics()
+ //make it clear that images will be downscaled at x2 pace
+4) manage url redirections
+  
+  urlConnection.setInstanceFollowRedirects(true);
+
+  if (mRequestPropertiesCallback != null) {
+    final ArrayList<NameValuePair> props = mRequestPropertiesCallback.getHeadersForRequest(context, url);
+    if (props != null) {
+      for (final NameValuePair pair: props) {
+        urlConnection.addRequestProperty(pair.getName(), pair.getValue());
+      }
+    }
+  }
+
+  if (urlConnection.getResponseCode() != HttpURLConnection.HTTP_MOVED_TEMP && urlConnection.getResponseCode() != HttpURLConnection.HTTP_MOVED_PERM)
+    break;
+  thisUrl = urlConnection.getHeaderField("Location");
+  
+5) check url response code before saving the image
+  urlConnection.getResponseCode() != HttpURLConnection.HTTP_OK
+  
+x6) Interesting bit about the content:// type of images
+
+  if (url.startsWith(ContentResolver.SCHEME_CONTENT)) {
+      final ContentResolver cr = context.getContentResolver();
+      if (url.startsWith(ContactsContract.Contacts.CONTENT_URI.toString())) {
+          is = ContactsContract.Contacts.openContactPhotoInputStream(cr, Uri.parse(url));
+      } else {
+          is = cr.openInputStream(Uri.parse(url));
+      }
+  }
+  
+7) make example based on fragments
+  
+8) try to execute tasks on executor always
