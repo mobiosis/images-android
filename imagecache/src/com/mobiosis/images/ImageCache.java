@@ -89,7 +89,8 @@ public class ImageCache {
 		int cacheSize = 4 * 1024 * 1024; // x MiB
 		mCachedImages = new LruCache<String, Bitmap>(cacheSize) {
 		       protected int sizeOf(String key, Bitmap value) {
-		           return value.getByteCount();
+		    	   //equivalent of getByteCount()
+		           return value.getRowBytes() * value.getHeight();
 		   }};
 		mRequestQueue = new HashMap<String, AbstractImageTask>(10);
 	}

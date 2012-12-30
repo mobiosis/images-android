@@ -220,7 +220,8 @@ public class ImagesExample extends Activity implements ViewObserver, FlickrTaskO
 		String[] pairs = query.split("&");
 		for (String pair : pairs) {
 			String[] param = pair.split("=");
-			params.put(param[0], param[1]);
+			if (param.length == 2)
+				params.put(param[0], param[1]);
 		}
 		return params;
 	}
